@@ -288,10 +288,10 @@ jobs:
 
   smoke-test:
     docker:
-    - image: python:3.7-alpine3.11
-    - attach_workspace:
-        at: ~/
+      - image: python:3.7-alpine3.11
     steps:
+      - attach_workspace:
+          at: ~/
       - checkout
       - run:
           name: Install dependencies
