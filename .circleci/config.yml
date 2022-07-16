@@ -180,6 +180,7 @@ jobs:
           command: |
             apk add --update openssh
             apk add --update tar
+            apk add --update ansible
             apk add --update gzip
             pip3 install awscli
       - run:
