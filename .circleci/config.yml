@@ -245,10 +245,10 @@ jobs:
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
       - destroy-environment 
       - run: 
-        name: Revert migration
-        command: |
-          cd backend
-          npm run migrations:revert
+          name: Revert migration
+          command: |
+            cd backend
+            npm run migrations:revert
                     
 #   deploy-backend:
 #     docker:
