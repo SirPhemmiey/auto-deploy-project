@@ -1,0 +1,31 @@
+
+
+- name: Update APT packages
+  become: yes
+  apt:
+    update_cache: true
+
+- name: Check for Python
+      raw: test -e /usr/bin/python
+      changed_when: false
+      failed_when: false
+      register: check_python
+
+- name: Install Python
+      raw: yum -y install python
+      when: check_python.rc != 0
+
+- name: Install NodeJs
+  become: yes
+  apt:
+    name: ["nodejs", "npm"]
+    state: latest
+    update_cache: yes
+
+- name: Install pm2
+  become: yes
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present
