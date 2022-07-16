@@ -127,14 +127,16 @@ jobs:
 
   deploy-infrastructure:
     docker:
-     - image: amazon/aws-cli
+     - image: python:3.7-alpine3.11
     steps:
       - checkout
       - run:
           name: Install tar and gzip
           command: |
-            apt update -q
-            apt install -y -q curl wget tar xz-utils gzip
+            apk add --update openssh
+            apk add --update tar
+            apk add --update gzip
+            pip3 install awscli
       - run:
           name: Ensure back-end infrastructure exists
           command: |
