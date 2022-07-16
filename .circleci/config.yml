@@ -13,7 +13,7 @@ commands:
           when: on_fail
           command: |
             aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
-            aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+            # aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             aws cloudformation delete-stack --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
 
   revert-migrations:
@@ -255,7 +255,7 @@ jobs:
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
       - destroy-environment 
-      - revert-migrations
+      # - revert-migrations
                     
   deploy-backend:
     docker:
@@ -284,7 +284,7 @@ jobs:
             cat inventory.txt
             ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.txt deploy-backend.yml
       - destroy-environment 
-      - revert-migrations
+      # - revert-migrations
 
   smoke-test:
     docker:
@@ -322,7 +322,7 @@ jobs:
               return 1
             fi
       - destroy-environment
-      - revert-migrations
+      # - revert-migrations
 
 #   cloudfront-update:
 #     docker:
