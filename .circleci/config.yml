@@ -23,16 +23,15 @@ commands:
     steps:
       - run:
           name: Revert migrations
-          # Add when this will run
+          when: on_fail
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
             SUCCESS = 1
             if(( $SUCCESS==1 )); 
             then
-            #  cd ~/project/backend
-            #  npm install
-            #  Add revert code here. You can find this in the Getting Started section.
-              exit 1
+              cd ~/project/backend
+              npm install
+              npm run migration:revert
             fi
             
 jobs:
@@ -251,11 +250,7 @@ jobs:
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
       - destroy-environment 
-      - run: 
-          name: Revert migration
-          command: |
-            cd backend
-            npm run migrations:revert
+      - undo_migrations
                     
   deploy-backend:
     docker:
@@ -284,11 +279,7 @@ jobs:
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
       - destroy-environment 
-      - run: 
-          name: Revert migration
-          command: |
-            cd backend
-            npm run migrations:revert
+      - undo_migrations
 
 #   smoke-test:
 #     docker:
