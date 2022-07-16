@@ -102,7 +102,7 @@ jobs:
        - checkout
        - restore_cache:
           keys: [frontend-build]
-        run: 
+       - run: 
           name: Scan Frontend
           command: |
             cd frontend
@@ -116,7 +116,7 @@ jobs:
        - checkout
        - restore_cache:
           keys: [backend-build]
-        run: 
+       - run: 
           name: Scan Backend
           command: |
             cd backend
