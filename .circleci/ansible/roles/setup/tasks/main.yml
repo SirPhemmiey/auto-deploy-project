@@ -6,8 +6,11 @@
     update_cache: true
 
 - name: Install Python
-    raw: yum -y install python
-    when: check_python.rc != 0
+  become: yes
+  apt:
+    name: python3
+    state: latest
+    update_cache: yes
 
 - name: Install NodeJs
   become: yes
