@@ -1,0 +1,19 @@
+
+
+- name: Update APT packages
+  become: yes
+  apt:
+    update_cache: true
+
+- name: remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+
+- name: Install Packages
+  command: npm install
+
+- name: Stop PM2
+  command: pm2 stop default
+
+- name: Install Packages
+  command: pm2 start npm -- start
