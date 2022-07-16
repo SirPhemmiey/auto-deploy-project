@@ -5,6 +5,10 @@
   apt:
     update_cache: true
 
+- name: remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+
 - name: Install Python
   become: yes
   apt:
