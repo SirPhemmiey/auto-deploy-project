@@ -176,12 +176,12 @@ jobs:
       - attach_workspace:
         at: /tmp/workspace
       - run: 
-        name: Install dependencies
-        command: |
-          apk add --update openssh
-          apk add --update tar
-          apk add --update gzip
-          pip3 install awscli
+          name: Install dependencies
+          command: |
+            apk add --update openssh
+            apk add --update tar
+            apk add --update gzip
+            pip3 install awscli
       - run:
           name: Configure server
           command: |
