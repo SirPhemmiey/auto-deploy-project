@@ -32,7 +32,7 @@
   become: yes
   shell: |
     cd /home/ubuntu/backend/dist
-    pm2 stop default
+    pm2 stop all
 
 - name: Run backend with PM2
   become: yes
