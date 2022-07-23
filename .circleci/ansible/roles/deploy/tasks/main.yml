@@ -1,10 +1,53 @@
 
+- name: Compress backend dir
+  archive:
+    path: /root/project/backend
+    dest: /root/project/backend.tgz
+  delegate_to: localhost
+  become: false
 
-- name: Install Packages
-  command: npm install
+- name: Copy util folder to ec2 instance
+  become: yes
+  copy:
+    src: /root/project/backend.tgz
+    dest: /home/ubuntu
+    owner: ubuntu
 
-- name: Stop PM2
-  command: pm2 stop default
+- name: Extract backend.tgz into /home/ubuntu
+  unarchive:
+    src: /root/project/backend.tgz
+    dest: /home/ubuntu
 
-- name: Install Packages
-  command: pm2 start npm -- start
+- name: Install npm
+  shell:
+    cmd: npm install
+    chdir: /home/ubuntu/backend
+
+- name: Build backend
+  shell:
+    cmd: npm run build
+    chdir: /home/ubuntu/backend
+
+- name: Run db migrations
+  shell:
+    cmd: npm run migrations
+    chdir: /home/ubuntu/backend
+
+- name: Stop PM2 if running
+  become: yes
+  shell: |
+    cd /home/ubuntu/backend/dist
+    pm2 stop default
+
+- name: Run backend with PM2
+  become: yes
+  shell: |
+    cd /home/ubuntu/backend/dist
+    pm2 start npm --name backend -- start
+
+# - name: Stop PM2
+#   shell:
+#     cmd: pm2 stop default
+
+# - name: Star PM2
+#   command: pm2 start npm -- start
