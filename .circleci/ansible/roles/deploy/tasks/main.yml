@@ -28,21 +28,14 @@
     cmd: npm run build
     chdir: /home/ubuntu/backend
 
-- name: Stop PM2 if running
-  become: yes
-  shell: |
-    cd /home/ubuntu/backend/dist
-    pm2 stop all
+# - name: Stop PM2 if running
+#   become: yes
+#   shell: |
+#     cd /home/ubuntu/backend/dist
+#     pm2 stop all
 
 - name: Run backend with PM2
   become: yes
   shell: |
     cd /home/ubuntu/backend/dist
     pm2 start npm --name backend -- start
-
-# - name: Stop PM2
-#   shell:
-#     cmd: pm2 stop default
-
-# - name: Star PM2
-#   command: pm2 start npm -- start
