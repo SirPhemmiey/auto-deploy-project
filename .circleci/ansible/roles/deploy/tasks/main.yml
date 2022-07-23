@@ -28,11 +28,6 @@
     cmd: npm run build
     chdir: /home/ubuntu/backend
 
-- name: Run db migrations
-  shell:
-    cmd: npm run migrations
-    chdir: /home/ubuntu/backend
-
 - name: Stop PM2 if running
   become: yes
   shell: |
