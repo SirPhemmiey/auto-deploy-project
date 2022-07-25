@@ -232,16 +232,16 @@ jobs:
       - run:
           name: Get backend url
           command: |
-            export BACKEND_IP=$(aws ec2 describe-instances \
+            BACKEND_IP=$(aws ec2 describe-instances \
              --query 'Reservations[*].Instances[*].PublicIpAddress'\
              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}"\
              --output text )
-            export API_URL="http://${BACKEND_IP}:3030"
+            API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
-            echo "${BACKEND_IP}"
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
             echo "http://${BACKEND_IP}:3030" >> .circleci/outputs/backend_url.txt
             cat frontend/.env
+            echo "${BACKEND_IP}"
       - persist_to_workspace:
           root: ~/
           paths:
