@@ -357,13 +357,13 @@ jobs:
             then
               aws cloudformation update-stack \
                 --region us-east-1 \
-                --template-body .circleci/files/cloudfront.yml \
+                --template-body file://./.circleci/files/cloudfront.yml \
                 --stack-name InitialStack \
                 --parameters ParameterKey=WorkflowID,ParameterValue=${CIRCLE_WORKFLOW_ID:0:7}
             else
               aws cloudformation create-stack \
                 --region us-east-1 \
-                --template-body .circleci/files/cloudfront.yml \
+                --template-body file://./.circleci/files/cloudfront.yml \
                 --stack-name InitialStack \
                 --parameters ParameterKey=WorkflowID,ParameterValue=${CIRCLE_WORKFLOW_ID:0:7}
             fi
