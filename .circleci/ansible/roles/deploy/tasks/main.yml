@@ -37,5 +37,5 @@
 - name: Run backend with PM2
   become: yes
   shell: |
-    cd /home/ubuntu/backend/dist
+    cd /home/ubuntu/backend
     pm2 start npm --name backend -- start
