@@ -367,6 +367,7 @@ jobs:
                 --stack-name InitialStack \
                 --parameters ParameterKey=WorkflowID,ParameterValue=${CIRCLE_WORKFLOW_ID:0:7}
             fi
+            echo Current Workflow Id: "${CIRCLE_WORKFLOW_ID:0:7}"
             
       - destroy-environment 
       - revert-migrations
