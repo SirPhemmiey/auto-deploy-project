@@ -1,0 +1,9 @@
+URL01=https://github.com/SirPhemmiey/auto-deploy-project
+URL02=http://udapeople-0b56883.s3-website-us-east-1.amazonaws.com/
+
+//Alert Manager
+http://ec2-54-197-155-94.compute-1.amazonaws.com:9093
+
+//Prometheus Alerts
+http://ec2-54-197-155-94.compute-1.amazonaws.com:9090/alerts
+
