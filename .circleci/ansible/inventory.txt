@@ -1,1 +1,5 @@
 [web]
+
+
+[prometheus-exporter-server]
+ec2-34-201-60-122.compute-1.amazonaws.com
